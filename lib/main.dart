@@ -19,28 +19,3 @@ class MyApp extends StatelessWidget {
         theme: AppTheme.lightTheme);
   }
 }
-//   class LoginIn extends StatelessWidget {
-//    LoginIn({Key? key}) : super(key: key);
-
-//    final GoogleSignIn _googleSignIn = GoogleSignIn();
-
-// @override
-// Widget build(BuildContext context){
-//   return Scaffold(
-//     body: Center(
-//       child: MaterialButton(
-//         onPressed: (){
-//           _googleSignIn.signIn().then((value) {
-//             String userName= value!.displayName!;
-//             String profilePicture = value.photoUrl!;
-//           });
-//         },
-//         color: Colors.red,
-//         height: 50,
-//         minWidth: 100,
-//         child: const Text('Login with Google', style: TextStyle(color: Colors.white)),
-//       )
-//     )
-//   );
-// } 
-// }

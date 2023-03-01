@@ -9,20 +9,28 @@ class AuthScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Center(
-            child: MaterialButton(
-      onPressed: () {
-        _googleSignIn.signIn().then((value) {
-          String userName = value!.displayName!;
+        body: Container(
+      width: double.infinity,
+      margin: const EdgeInsets.only(bottom: 40),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          ElevatedButton.icon(
+            onPressed: () {
+              _googleSignIn.signIn().then((value) {
+                String userName = value!.displayName!;
 
-          print(userName);
-        });
-      },
-      color: Colors.red,
-      height: 50,
-      minWidth: 100,
-      child: const Text('Login with Google',
-          style: TextStyle(color: Colors.white)),
-    )));
+                print(userName);
+                Navigator.popAndPushNamed(context, 'home');
+              });
+            },
+            icon: const Icon(Icons.login),
+            label: const Text('Login with Google',
+                style: TextStyle(color: Colors.white)),
+          ),
+        ],
+      ),
+    ));
   }
 }
