@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:plec_app_flutter/router/app_routes.dart';
+import 'package:plec_app_flutter/widgets/circle_avatar.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -9,7 +9,8 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home'),
-        actions: [appBarActions(context)],
+        centerTitle: true,
+        actions: <Widget>[appBarActions(context)],
       ),
       body: const Center(
         child: Text('HomeScreen'),
@@ -23,12 +24,14 @@ class HomeScreen extends StatelessWidget {
       child: Row(
         children: [
           const Text('lvl 100'),
-          //  const VerticalDivider(width: 200),
+          const VerticalDivider(
+            width: 20,
+          ),
           InkWell(
               onTap: () => Navigator.pushNamed(context, 'profile_settings'),
-              child: CircleAvatar(
-                  backgroundColor: Colors.indigo[900],
-                  child: const Text('SC'))),
+              child: const CustomAvatarProfile(
+                backgroundColor: Colors.indigo,
+              )),
         ],
       ),
     );
