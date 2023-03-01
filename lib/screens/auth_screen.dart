@@ -1,31 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:plec_app_flutter/router/app_routes.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthScreen extends StatelessWidget {
-  const AuthScreen({Key? key}) : super(key: key);
+  AuthScreen({Key? key}) : super(key: key);
+
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            ElevatedButton(
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 15,
-                  ),
-                  child: Text('Iniciar Sesión', style: TextStyle(fontSize: 16)),
-                ),
-                onPressed: () => Navigator.pushReplacementNamed(
-                    context, AppRoutes.menuOptions[0].route)),
-          ],
-        ),
-      ),
-    );
+        body: Center(
+            child: MaterialButton(
+      onPressed: () {
+        _googleSignIn.signIn().then((value) {
+          String userName = value!.displayName!;
+
+          print(userName);
+        });
+      },
+      color: Colors.red,
+      height: 50,
+      minWidth: 100,
+      child: const Text('Login with Google',
+          style: TextStyle(color: Colors.white)),
+    )));
   }
 }

@@ -17,7 +17,7 @@ class AppRoutes {
 
   static Map<String, Widget Function(BuildContext)> getAppRoutes() {
     Map<String, Widget Function(BuildContext)> appRoutes = {};
-    appRoutes.addAll({'auth': (BuildContext context) => const AuthScreen()});
+    appRoutes.addAll({'auth': (BuildContext context) => AuthScreen()});
     appRoutes.addAll(
         {'profile_settings': (BuildContext context) => const ProfileScreen()});
     for (final option in menuOptions) {
