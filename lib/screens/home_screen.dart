@@ -1,6 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:plec_app_flutter/theme/app_theme.dart';
-import 'package:plec_app_flutter/widgets/circle_avatar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -11,6 +11,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
+
+  var user = FirebaseAuth.instance.currentUser!;
 
   void _onItemTapped(int index) {
     if (index == 0) {
@@ -67,12 +69,14 @@ class _HomeScreenState extends State<HomeScreen> {
   Row appBarActions(BuildContext context) {
     return Row(
       children: [
+        //Text(user.displayName!),
         InkWell(
             onTap: () => Navigator.pushNamed(context, 'profile_settings'),
-            child: const Padding(
-              padding: EdgeInsets.fromLTRB(10, 0, 5, 0),
-              child: CustomAvatarProfile(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(10, 0, 5, 0),
+              child: CircleAvatar(
                 backgroundColor: Colors.indigo,
+                backgroundImage: NetworkImage(user.photoURL!),
               ),
             )),
       ],
