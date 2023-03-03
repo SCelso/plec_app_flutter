@@ -1,8 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:plec_app_flutter/theme/app_theme.dart';
 import 'package:plec_app_flutter/widgets/circle_avatar.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    if (index == 0) {
+      Navigator.popAndPushNamed(context, 'home');
+    } else if (index == 1) {
+      Navigator.popAndPushNamed(context, 'ranking');
+    } else if (index == 2) {
+      Navigator.popAndPushNamed(context, 'settings');
+    }
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -12,28 +33,59 @@ class HomeScreen extends StatelessWidget {
         centerTitle: true,
         actions: <Widget>[appBarActions(context)],
       ),
-      body: const Center(
-        child: Text('HomeScreen'),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                  onPressed: () => Navigator.pushNamed(context, 'join_game'),
+                  child: const Text('Join game')),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                  onPressed: () => print('0'), child: const Text('0')),
+            ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.emoji_events_sharp),
+            label: 'Ranking',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: AppTheme.primary,
+        onTap: _onItemTapped,
       ),
     );
   }
 
-  Container appBarActions(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(right: 5),
-      child: Row(
-        children: [
-          const Text('lvl 100'),
-          const VerticalDivider(
-            width: 20,
-          ),
-          InkWell(
-              onTap: () => Navigator.pushNamed(context, 'profile_settings'),
-              child: const CustomAvatarProfile(
+  Row appBarActions(BuildContext context) {
+    return Row(
+      children: [
+        const Text('lvl 100'),
+        InkWell(
+            onTap: () => Navigator.pushNamed(context, 'profile_settings'),
+            child: const Padding(
+              padding: EdgeInsets.fromLTRB(10, 0, 5, 0),
+              child: CustomAvatarProfile(
                 backgroundColor: Colors.indigo,
-              )),
-        ],
-      ),
+              ),
+            )),
+      ],
     );
   }
 }
