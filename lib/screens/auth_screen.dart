@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -19,12 +18,12 @@ class AuthScreen extends StatelessWidget {
         children: [
           ElevatedButton.icon(
             onPressed: () {
-              _googleSignIn.signIn().then((value) {
-                String userName = value!.displayName.toString();
+              signInWithGoogle().then((value) {
+                String userName = value.user!.displayName.toString();
 
                 print(userName);
                 Navigator.popAndPushNamed(context, 'home');
-              });
+              }).catchError((error) => print(error));
             },
             icon: const Icon(Icons.login),
             label: const Text('Login with Google',
