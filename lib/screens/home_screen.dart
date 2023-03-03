@@ -43,11 +43,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   onPressed: () => Navigator.pushNamed(context, 'join_game'),
                   child: const Text('Join game')),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(
-                  onPressed: () => print('0'), child: const Text('0')),
-            ),
           ],
         ),
       ),
@@ -56,10 +51,6 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.emoji_events_sharp),
-            label: 'Ranking',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
@@ -76,7 +67,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Row appBarActions(BuildContext context) {
     return Row(
       children: [
-        const Text('lvl 100'),
         InkWell(
             onTap: () => Navigator.pushNamed(context, 'profile_settings'),
             child: const Padding(

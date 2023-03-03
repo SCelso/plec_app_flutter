@@ -1,10 +1,46 @@
+import 'dart:math';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:roulette/roulette.dart';
 
-class AuthScreen extends StatelessWidget {
-  AuthScreen({Key? key}) : super(key: key);
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
+import '../widgets/roulette.dart';
+
+class AuthScreen extends StatefulWidget {
+  const AuthScreen({Key? key}) : super(key: key);
+
+  @override
+  State<AuthScreen> createState() => _AuthScreenState();
+}
+
+class _AuthScreenState extends State<AuthScreen>
+    with SingleTickerProviderStateMixin {
+  //ROULETTE
+  static final _random = Random();
+
+  late RouletteController _controller;
+  bool _clockwise = true;
+
+  final colors = <Color>[
+    Colors.red.withAlpha(50),
+    Colors.green.withAlpha(30),
+    Colors.blue.withAlpha(70),
+    Colors.yellow.withAlpha(90),
+    Colors.amber.withAlpha(50),
+    Colors.indigo.withAlpha(70),
+  ];
+
+  @override
+  void initState() {
+    // Initialize the controller
+    final group = RouletteGroup.uniform(
+      colors.length,
+      colorBuilder: colors.elementAt,
+    );
+    _controller = RouletteController(vsync: this, group: group);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +52,16 @@ class AuthScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          Padding(
+            padding: const EdgeInsets.only(bottom: 250),
+            child: GestureDetector(
+                onTap: () => _controller.rollTo(
+                      3,
+                      clockwise: _clockwise,
+                      offset: _random.nextDouble(),
+                    ),
+                child: MyRoulette(controller: _controller)),
+          ),
           ElevatedButton.icon(
             onPressed: () {
               signInWithGoogle().then((value) {
