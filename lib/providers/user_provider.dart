@@ -12,7 +12,7 @@ class UserProvider extends ChangeNotifier {
     var uri = Uri.parse('${Enviroment.apiUrl}/users/players');
     final resp = await http.post(uri,
         body: jsonEncode(data), headers: {'Content-Type': 'application/json'});
-    if (resp.statusCode == 200) {
+    if (resp.statusCode == 201) {
       print(resp.body);
       return resp.body;
     }
