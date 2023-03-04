@@ -8,9 +8,16 @@ import 'package:plec_app_flutter/global/enviroment.dart';
 class UserProvider extends ChangeNotifier {
   Future addUser(String email) async {
     final data = {'email': email};
-
-    final resp = await http.post('${Enviroment.apiUrl}/users/players' as Uri,
+    // print('${Enviroment.apiUrl}/users/players');
+    var uri = Uri.parse('${Enviroment.apiUrl}/users/players');
+    final resp = await http.post(uri,
         body: jsonEncode(data), headers: {'Content-Type': 'application/json'});
-    print(resp.body);
+    if (resp.statusCode == 200) {
+      print(resp.body);
+      return resp.body;
+    } else {
+      print(resp.body);
+      return resp.body;
+    }
   }
 }
