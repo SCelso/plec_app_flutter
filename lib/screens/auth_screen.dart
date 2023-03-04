@@ -1,6 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/user_provider.dart';
 
 class AuthScreen extends StatelessWidget {
   AuthScreen({Key? key}) : super(key: key);
@@ -18,8 +21,14 @@ class AuthScreen extends StatelessWidget {
         children: [
           ElevatedButton.icon(
             onPressed: () {
-              signInWithGoogle().then((value) {
+              signInWithGoogle().then((value) async {
                 String userName = value.user!.displayName.toString();
+                String userEmail = value.user!.email.toString();
+                print(userEmail);
+
+                final userProvider =
+                    Provider.of<UserProvider>(context, listen: false);
+                userProvider.addUser(userEmail);
 
                 print(userName);
                 Navigator.popAndPushNamed(context, 'home');
