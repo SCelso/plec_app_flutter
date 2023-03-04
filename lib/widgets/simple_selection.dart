@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:plec_app_flutter/models/answer.dart';
-import 'package:plec_app_flutter/theme/app_theme.dart';
+
+import '../models/models.dart' show Answer;
 
 class SimpleSelectionWidget extends StatelessWidget {
   final List<Answer> answers;

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:plec_app_flutter/models/answer.dart';
-import 'package:plec_app_flutter/models/question.dart';
-import 'package:plec_app_flutter/widgets/reusable_card.dart';
-import 'package:plec_app_flutter/widgets/true_false.dart';
+import 'package:plec_app_flutter/models/models.dart';
+import 'package:plec_app_flutter/widgets/multiple_selection.dart';
 
-import '../widgets/simple_selection.dart';
+import '../widgets/widgets.dart' show ReusableCard, SimpleSelectionWidget;
 
 class QuestionsScreen extends StatefulWidget {
   const QuestionsScreen({Key? key}) : super(key: key);
@@ -18,19 +16,19 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
   List<Question> quesAnsList = [
     Question(
         id: '1',
-        title: "Gabo es tontisimo??",
-        description: "description",
+        description: "Gabo es tontisimo??",
         type: "true_false",
         image: "image",
         difficulty: 1,
         answers: [
           Answer(text: "True", val: 1),
           Answer(text: "True", val: 0),
-        ]),
+        ],
+        professor: Professor(id: '1', name: "Gabo", email: "Gabo es tontisimo"),
+        tags: []),
     Question(
-        id: '1',
-        title: "Elige la orientación sexual de Gabo",
-        description: "description",
+        id: '2',
+        description: "Elige la orientación sexual de Gabo",
         type: "simple_selection",
         image: "image",
         difficulty: 1,
@@ -41,7 +39,10 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
           Answer(
               text: "Militante del gobierno bolivariano social-comunista ",
               val: 0),
-        ])
+        ],
+        professor:
+            Professor(id: '1', name: "Jaime", email: "Gabo es tontisimo"),
+        tags: [])
   ];
 
   @override
@@ -55,7 +56,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
           child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          ReusableCard(text: quesAnsList[_currentIndexNumber].title),
+          ReusableCard(text: quesAnsList[_currentIndexNumber].description),
           checkType(),
           ElevatedButton(
               onPressed: () {
@@ -76,14 +77,19 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
   }
 
   Widget checkType() {
-    if (quesAnsList[_currentIndexNumber].type == "true_false") {
+    if (quesAnsList[_currentIndexNumber].type == "true-false" ||
+        quesAnsList[_currentIndexNumber].type == "simple-selection") {
       return SimpleSelectionWidget(
           answers: quesAnsList[_currentIndexNumber].answers);
-    } else if (quesAnsList[_currentIndexNumber].type == "simple_selection") {
-      return SimpleSelectionWidget(
-          answers: quesAnsList[_currentIndexNumber].answers);
+      //} else if (quesAnsList[_currentIndexNumber].type == "multiple-selection") {
+      // return MultipleSelectionWidget(
+      //     answers: quesAnsList[_currentIndexNumber].answers);
     } else {
       return const Text("No type");
     }
   }
 }
+
+//"multiple-selection"
+//order
+//written

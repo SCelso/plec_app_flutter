@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:roulette/roulette.dart';
 
-import '../widgets/roulette.dart';
+import '../widgets/widgets.dart' show MyRoulette;
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({Key? key}) : super(key: key);
@@ -82,7 +82,6 @@ class _AuthScreenState extends State<AuthScreen>
 }
 
 Future<UserCredential> signInWithGoogle() async {
-  // await Firebase.initializeApp();
   // Trigger the authentication flow
   final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
