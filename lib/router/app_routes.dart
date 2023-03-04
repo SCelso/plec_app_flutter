@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:plec_app_flutter/screens/auth_page_screen.dart';
 import 'package:plec_app_flutter/screens/join_game_screen.dart';
+import 'package:plec_app_flutter/screens/questions_screen.dart';
 import 'package:plec_app_flutter/screens/settings_screen.dart';
+import 'package:plec_app_flutter/widgets/reusable_card.dart';
 
 import '../models/models.dart';
 import '../screens/screens.dart';
+import '../widgets/true_false.dart';
 
 class AppRoutes {
   static const initialRoute = 'auth';
@@ -25,6 +28,7 @@ class AppRoutes {
 
     appRoutes.addAll(
         {'join_game': (BuildContext context) => const JoinGameScreen()});
+    appRoutes.addAll({'card': (BuildContext context) => QuestionsScreen()});
     appRoutes
         .addAll({'settings': (BuildContext context) => const SettingsScreen()});
 

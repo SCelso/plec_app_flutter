@@ -39,6 +39,8 @@ dependencies:
     firebase_auth: ^4.2.9
     firebase_core: ^2.7.0
     roulette: ^0.1.3+1
+    http: ^0.13.5
+    auto_size_text: ^3.0.0
 
 dev_dependencies:
     flutter_test:

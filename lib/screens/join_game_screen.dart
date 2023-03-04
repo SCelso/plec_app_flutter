@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:plec_app_flutter/widgets/custom_input_field.dart';
 
 class JoinGameScreen extends StatelessWidget {
   const JoinGameScreen({Key? key}) : super(key: key);
@@ -16,13 +15,23 @@ class JoinGameScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // ignore: prefer_const_constructors
-            TextField(
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Code',
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: const SizedBox(
+                width: 300,
+                child: TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Code',
+                  ),
+                ),
               ),
             ),
-            ElevatedButton(onPressed: () {}, child: const Text('Send')),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, 'card');
+                },
+                child: const Text('Send')),
           ],
         ),
       ),

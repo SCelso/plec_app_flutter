@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:plec_app_flutter/theme/app_theme.dart';
+import 'package:http/http.dart' as http;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -12,7 +13,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
-  var user = FirebaseAuth.instance.currentUser!;
+  User user = FirebaseAuth.instance.currentUser!;
 
   void _onItemTapped(int index) {
     if (index == 0) {
@@ -42,7 +43,9 @@ class _HomeScreenState extends State<HomeScreen> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
-                  onPressed: () => Navigator.pushNamed(context, 'join_game'),
+                  onPressed: () {
+                    Navigator.pushNamed(context, 'join_game');
+                  },
                   child: const Text('Join game')),
             ),
           ],
