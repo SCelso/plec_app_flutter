@@ -15,9 +15,6 @@ class UserProvider extends ChangeNotifier {
     if (resp.statusCode == 200) {
       print(resp.body);
       return resp.body;
-    } else {
-      print(resp.body);
-      return resp.body;
     }
   }
 }
