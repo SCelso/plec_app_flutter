@@ -10,7 +10,6 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final nicknameTextField = Provider.of<NicknameProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Profile'),
@@ -20,35 +19,45 @@ class ProfileScreen extends StatelessWidget {
           child: Column(
         children: [
           ChangeNotifierProvider(
-            create: (_) => NicknameProvider(),
-            child: Padding(
-              key: nicknameTextField.key,
-              padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                autocorrect: false,
-                decoration: const InputDecoration(
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: AppTheme.primary)),
-                    focusedBorder: UnderlineInputBorder(
-                        borderSide:
-                            BorderSide(color: AppTheme.primary, width: 3)),
-                    hintText: 'Nickname',
-                    labelText: 'Nickname',
-                    labelStyle: TextStyle(color: Colors.grey)),
-                onChanged: (value) => nicknameTextField.nickname = value,
-              ),
-            ),
-          ),
-          ElevatedButton(
-              onPressed: () {
-                final nickname = nicknameTextField.nickname;
-                final userProvider =
-                    Provider.of<UserProvider>(context, listen: false);
-                userProvider.changeNickname(nickname);
-              },
-              child: const Text('Cambiar Nickname'))
+              create: (_) => NicknameProvider(), child: _Profile()),
         ],
       )),
+    );
+  }
+}
+
+class _Profile extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final nicknameTextField = Provider.of<NicknameProvider>(context);
+    return Form(
+      key: nicknameTextField.key,
+      child: Column(children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: TextFormField(
+            autocorrect: false,
+            decoration: const InputDecoration(
+                enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: AppTheme.primary)),
+                focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: AppTheme.primary, width: 3)),
+                hintText: 'Nickname',
+                labelText: 'Nickname',
+                labelStyle: TextStyle(color: Colors.grey)),
+            onChanged: (value) => nicknameTextField.nickname = value,
+          ),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            final nickname = nicknameTextField.nickname;
+            final userProvider =
+                Provider.of<UserProvider>(context, listen: false);
+            userProvider.changeNickname(nickname);
+          },
+          child: const Text('Cambiar Nickname'),
+        ),
+      ]),
     );
   }
 }

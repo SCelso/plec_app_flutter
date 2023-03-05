@@ -38,7 +38,7 @@ class UserProvider extends ChangeNotifier {
     var uri = Uri.parse('${Enviroment.apiUrl}/users/players/$id');
     final resp = await http.patch(uri,
         body: jsonEncode(data), headers: {'Content-Type': 'application/json'});
-    if (resp.statusCode == 201) {
+    if (resp.statusCode == 200) {
       return await _saveUserData(resp.body);
     }
   }
