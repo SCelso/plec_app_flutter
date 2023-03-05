@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:plec_app_flutter/screens/auth_page_screen.dart';
-import 'package:plec_app_flutter/screens/join_game_screen.dart';
-import 'package:plec_app_flutter/screens/questions_screen.dart';
-import 'package:plec_app_flutter/screens/settings_screen.dart';
-import 'package:plec_app_flutter/widgets/reusable_card.dart';
+import 'package:plec_app_flutter/widgets/widgets.dart';
 
 import '../models/models.dart';
 import '../screens/screens.dart';
-import '../widgets/true_false.dart';
 
 class AppRoutes {
   static const initialRoute = 'auth';
@@ -24,11 +19,24 @@ class AppRoutes {
 
   static Map<String, Widget Function(BuildContext)> getAppRoutes() {
     Map<String, Widget Function(BuildContext)> appRoutes = {};
-    appRoutes.addAll({'auth': (BuildContext context) => AuthScreen()});
+    appRoutes.addAll({'auth': (BuildContext context) => const AuthScreen()});
 
     appRoutes.addAll(
         {'join_game': (BuildContext context) => const JoinGameScreen()});
-    appRoutes.addAll({'card': (BuildContext context) => QuestionsScreen()});
+    appRoutes.addAll(
+        {'questions': (BuildContext context) => const QuestionsScreen()});
+    appRoutes.addAll({
+      'card': (BuildContext context) => MultipleSelectionWidget(
+            answers: [
+              Answer(text: "Gay", val: 1),
+              Answer(text: "Homosexual", val: 0),
+              Answer(text: "Estonio", val: 1),
+              Answer(
+                  text: "Militante del gobierno bolivariano social-comunista ",
+                  val: 0),
+            ],
+          )
+    });
     appRoutes
         .addAll({'settings': (BuildContext context) => const SettingsScreen()});
 

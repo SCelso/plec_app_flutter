@@ -29,7 +29,7 @@ class JoinGameScreen extends StatelessWidget {
             ),
             ElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, 'card');
+                  Navigator.pushNamed(context, 'questions');
                 },
                 child: const Text('Send')),
           ],

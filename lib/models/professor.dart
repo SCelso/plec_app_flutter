@@ -9,6 +9,11 @@ class Professor {
     required this.name,
   });
 
+  factory Professor.fromJson(Map<String, dynamic> json) => Professor(
+        id: json["id"],
+        email: json["email"],
+        name: json["name"],
+      );
   Map<String, dynamic> toJson() => {
         "id": id,
         "email": email,
