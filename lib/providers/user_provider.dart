@@ -40,6 +40,8 @@ class UserProvider extends ChangeNotifier {
         body: jsonEncode(data), headers: {'Content-Type': 'application/json'});
     if (resp.statusCode == 200) {
       return await _saveUserData(resp.body);
+    } else if (resp.statusCode == 400 || resp.statusCode == 500) {
+      return 'Ha ocurrido un error';
     }
   }
 
