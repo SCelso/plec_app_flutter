@@ -24,7 +24,8 @@ class AppTheme {
         style: ElevatedButton.styleFrom(
             backgroundColor: Colors.indigo,
             shape: const StadiumBorder(),
-            elevation: 0),
+            elevation: 0,
+            minimumSize: const Size(300, 50)),
       ),
       inputDecorationTheme: const InputDecorationTheme(
         floatingLabelStyle: TextStyle(color: primary),
