@@ -3,8 +3,10 @@ import 'dart:math';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:provider/provider.dart';
 import 'package:roulette/roulette.dart';
 
+import '../providers/user_provider.dart';
 import '../widgets/widgets.dart' show MyRoulette;
 
 class AuthScreen extends StatefulWidget {
