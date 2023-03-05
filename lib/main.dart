@@ -9,7 +9,6 @@ import 'package:plec_app_flutter/router/app_routes.dart';
 import 'package:plec_app_flutter/theme/app_theme.dart';
 
 import 'providers/user_provider.dart';
-// import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
