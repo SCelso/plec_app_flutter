@@ -24,13 +24,11 @@ class AuthScreen extends StatelessWidget {
               signInWithGoogle().then((value) async {
                 String userName = value.user!.displayName.toString();
                 String userEmail = value.user!.email.toString();
-                print(userEmail);
 
                 final userProvider =
                     Provider.of<UserProvider>(context, listen: false);
                 userProvider.addUser(userEmail);
 
-                print(userName);
                 Navigator.popAndPushNamed(context, 'home');
               }).catchError((error) => print(error));
             },
