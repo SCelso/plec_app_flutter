@@ -1,6 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:plec_app_flutter/theme/app_theme.dart';
-import 'package:plec_app_flutter/widgets/circle_avatar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -11,6 +11,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
+
+  User user = FirebaseAuth.instance.currentUser!;
 
   void _onItemTapped(int index) {
     if (index == 0) {
@@ -40,13 +42,10 @@ class _HomeScreenState extends State<HomeScreen> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
-                  onPressed: () => Navigator.pushNamed(context, 'join_game'),
+                  onPressed: () {
+                    Navigator.pushNamed(context, 'join_game');
+                  },
                   child: const Text('Join game')),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(
-                  onPressed: () => print('0'), child: const Text('0')),
             ),
           ],
         ),
@@ -56,10 +55,6 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.emoji_events_sharp),
-            label: 'Ranking',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
@@ -76,13 +71,14 @@ class _HomeScreenState extends State<HomeScreen> {
   Row appBarActions(BuildContext context) {
     return Row(
       children: [
-        const Text('lvl 100'),
+        //Text(user.displayName!),
         InkWell(
             onTap: () => Navigator.pushNamed(context, 'profile_settings'),
-            child: const Padding(
-              padding: EdgeInsets.fromLTRB(10, 0, 5, 0),
-              child: CustomAvatarProfile(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(10, 0, 5, 0),
+              child: CircleAvatar(
                 backgroundColor: Colors.indigo,
+                backgroundImage: NetworkImage(user.photoURL!),
               ),
             )),
       ],
