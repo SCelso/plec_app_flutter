@@ -22,10 +22,10 @@ class SimpleSelectionWidget extends StatelessWidget {
 }
 
 List<Widget> getButtons(List<Answer> answers) {
-  List<Widget> Buttons = [];
+  List<Widget> buttons = [];
   {
     answers.forEach((element) {
-      Buttons.add(Padding(
+      buttons.add(Padding(
         padding: const EdgeInsets.all(8.0),
         child: SizedBox(
             width: 300,
@@ -33,5 +33,5 @@ List<Widget> getButtons(List<Answer> answers) {
       ));
     });
   }
-  return Buttons;
+  return buttons;
 }

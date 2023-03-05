@@ -1,71 +1,77 @@
-// import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'package:plec_app_flutter/theme/app_theme.dart';
 
-// import '../models/models.dart' show Answer;
+import '../models/models.dart' show Answer;
 
-// class MultipleSelectionWidget extends StatefulWidget {
-//   final List<Answer> answers;
-//   const MultipleSelectionWidget({
-//     Key? key,
-//     required this.answers,
-//   }) : super(key: key);
+class MultipleSelectionWidget extends StatefulWidget {
+  final List<Answer> answers;
 
-//   @override
-//   State<MultipleSelectionWidget> createState() =>
-//       _MultipleSelectionWidgetState();
-// }
+  const MultipleSelectionWidget({
+    Key? key,
+    required this.answers,
+  }) : super(key: key);
 
-// class _MultipleSelectionWidgetState extends State<MultipleSelectionWidget> {
-//   List<bool> _isChecked = [];
+  @override
+  State<MultipleSelectionWidget> createState() =>
+      _MultipleSelectionWidgetState();
+}
 
-//   @override
-//   initState() {
-//     super.initState();
-//     _isChecked = List<bool>.filled(answers.length, false);
-//   }
+class _MultipleSelectionWidgetState extends State<MultipleSelectionWidget> {
+  List<bool> _isChecked = [];
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return ListView.builder(
-//       itemCount: widget.answers.length,
-//       itemBuilder: (_, i) {
-//         return Card(
-//           elevation: 4,
-//           shape: RoundedRectangleBorder(
-//             borderRadius: const BorderRadius.all(
-//               Radius.circular(8),
-//             ),
-//             side: BorderSide(
-//               color: Colors.purple.withOpacity(0.7),
-//               width: 0.6,
-//             ),
-//           ),
-//           child: ListTile(
-//             dense: true,
-//             leading: Checkbox(
-//               value: _isChecked[i],
-//               onChanged: (val) => setState(() {
-//                 _isChecked[i] = val!;
-//               }),
-//             ),
-//             title: Text(widget.answers[i]),
-//           ),
-//         );
-//       },
-//     );
-//   }
-// }
+  @override
+  initState() {
+    super.initState();
+    _isChecked = List<bool>.filled(widget.answers.length, false);
+  }
 
-// List<Widget> getCheckBox(List<Answer> answers) {
-//   List<Widget> CheckBox = [];
-//   {
-//     answers.forEach((element) {
-//       CheckBox.add(Padding(
-//         padding: const EdgeInsets.all(8.0),
-//         child: SizedBox(
-//             width: 300,
-//             child: ElevatedButton(onPressed: () {}, child: Text(element.text))),
-//       ));
-//     });
-//   }
-//   return CheckBox;
-// }
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 225,
+      width: 350,
+      child: ListView.builder(
+        itemCount: widget.answers.length,
+        itemBuilder: (_, i) {
+          return Card(
+            elevation: 4,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(8),
+              ),
+              side: BorderSide(
+                color: AppTheme.primary,
+                width: 0.6,
+              ),
+            ),
+            child: ListTile(
+              dense: true,
+              leading: Checkbox(
+                value: _isChecked[i],
+                onChanged: (val) => setState(() {
+                  _isChecked[i] = val!;
+                }),
+              ),
+              title: Text(widget.answers[i].text),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+List<Widget> getCheckBox(List<Answer> answers) {
+  List<Widget> checkBox = [];
+  {
+    answers.forEach((element) {
+      checkBox.add(Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SizedBox(
+            width: 300,
+            child: ElevatedButton(onPressed: () {}, child: Text(element.text))),
+      ));
+    });
+  }
+  return checkBox;
+}
