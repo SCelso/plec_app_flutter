@@ -66,15 +66,18 @@ class _Profile extends StatelessWidget {
             onChanged: (value) => nicknameTextField.nickname = value,
           ),
         ),
-        ElevatedButton(
-          onPressed: () {
-            final nickname = nicknameTextField.nickname;
-            final userProvider =
-                Provider.of<UserProvider>(context, listen: false);
-            userProvider.changeNickname(nickname);
-          },
-          child: const Text('Cambiar Nickname'),
-        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ElevatedButton(
+            onPressed: () {
+              final nickname = nicknameTextField.nickname;
+              final userProvider =
+                  Provider.of<UserProvider>(context, listen: false);
+              userProvider.changeNickname(nickname);
+            },
+            child: const Text('Cambiar Nickname'),
+          ),
+        )
       ]),
     );
   }
