@@ -93,17 +93,20 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
       ),
       body: Center(
           child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           ReusableCard(
               text: quesAnsList.questions[_currentIndexNumber].description,
               image: quesAnsList.questions[_currentIndexNumber].image),
           checkType(),
-          ElevatedButton(
-              onPressed: () {
-                showNextCard();
-              },
-              child: const Text('Next')),
+          Container(
+            margin: const EdgeInsets.only(bottom: 20),
+            child: ElevatedButton(
+                onPressed: () {
+                  showNextCard();
+                },
+                child: const Text('Next')),
+          ),
         ],
       )),
     );
