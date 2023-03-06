@@ -61,17 +61,17 @@ class _MultipleSelectionWidgetState extends State<MultipleSelectionWidget> {
   }
 }
 
-List<Widget> getCheckBox(List<Answer> answers) {
-  List<Widget> checkBox = [];
-  {
-    answers.forEach((element) {
-      checkBox.add(Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SizedBox(
-            width: 300,
-            child: ElevatedButton(onPressed: () {}, child: Text(element.text))),
-      ));
-    });
-  }
-  return checkBox;
-}
+// List<Widget> getCheckBox(List<Answer> answers) {
+//   List<Widget> checkBox = [];
+//   {
+//     answers.forEach((element) {
+//       checkBox.add(Padding(
+//         padding: const EdgeInsets.all(8.0),
+//         child: SizedBox(
+//             width: 300,
+//             child: ElevatedButton(onPressed: () {}, child: Text(element.text))),
+//       ));
+//     });
+//   }
+//   return checkBox;
+// }

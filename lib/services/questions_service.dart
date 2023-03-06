@@ -1,39 +1,41 @@
-// import 'dart:async';
+import 'dart:async';
 
-// import 'package:flutter/material.dart';
-// import 'package:plec_app_flutter/models/models.dart' show Question;
-// import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
+import 'package:plec_app_flutter/models/models.dart' show Answer, Question;
+import 'package:plec_app_flutter/models/questions.dart';
+import 'package:provider/provider.dart';
 
-// import '../providers/questions_provider.dart';
+import '../providers/questions_provider.dart';
 
-// class _QuestionsService {
-//   List<Question> _questions;
+class _QuestionsService {
+  QuestionsList? _questions;
+  int puntos = 0;
 
-//   StreamController<List<Question>> _questionsStreamController =
-//       StreamController<List<Question>>.broadcast();
+  StreamController<QuestionsList> _questionsStreamController =
+      StreamController<QuestionsList>.broadcast();
 
-//   List<Question>? get questions => _questions;
-//   bool get questionListExists => (_questions != null) ? true : false;
+  QuestionsList? get questions => _questions;
+  bool get questionListExists => (_questions != null) ? true : false;
 
-//   Stream<List<Question>> get questionsStream =>
-//       _questionsStreamController.stream;
+  Stream<QuestionsList> get questionsStream =>
+      _questionsStreamController.stream;
 
-//   void cargarQuestions(BuildContext context) {
-//     final questionsProvider = Provider.of<QuestionsProvider>(context);
-//     questionsProvider.getQuestions().then((value) {
-//       _questions = value;
-//     });
-//     _questionsStreamController.add(_questions!);
-//   }
+  void puntuarQuestions(Answer answer) {
+    if (answer.val == 1) {
+      puntos++;
+    }
 
-//   // void cambiarEdad(int edad) {
-//   //   this._questions.edad = edad;
-//   //   _usuarioStreamController.add(this._questions);
-//   // }
+    print(puntos);
+  }
 
-//   dispose() {
-//     _questionsStreamController?.close();
-//   }
-// }
+  // void cambiarEdad(int edad) {
+  //   this._questions.edad = edad;
+  //   _usuarioStreamController.add(this._questions);
+  // }
 
-// final questionService = _QuestionsService();
+  dispose() {
+    _questionsStreamController?.close();
+  }
+}
+
+final questionService = _QuestionsService();
