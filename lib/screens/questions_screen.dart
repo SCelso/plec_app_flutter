@@ -17,7 +17,37 @@ class QuestionsScreen extends StatefulWidget {
 
 class _QuestionsScreenState extends State<QuestionsScreen> {
   int _currentIndexNumber = 0;
-  QuestionsList quesAnsList = QuestionsList(questions: []);
+  QuestionsList quesAnsList = QuestionsList(questions: [
+    Question(
+        id: '1',
+        description: "Gabo es tontisimo??",
+        type: "true-false",
+        image:
+            "http://10.141.4.126:3000/api/questions/files/64047f0537807640ed96c60a.png",
+        difficulty: 1,
+        answers: [
+          Answer(text: "True", val: 1),
+          Answer(text: "True", val: 0),
+        ],
+        professor: Professor(id: '1', name: "Gabo", email: "Gabo es tontisimo"),
+        tags: []),
+    Question(
+        id: '2',
+        description: "Elige la orientación sexual de Gabo",
+        type: "multiple-selection",
+        difficulty: 1,
+        answers: [
+          Answer(text: "Gay", val: 1),
+          Answer(text: "Homosexual", val: 0),
+          Answer(text: "Estonio", val: 1),
+          Answer(
+              text: "Militante del gobierno bolivariano social-comunista ",
+              val: 0),
+        ],
+        professor:
+            Professor(id: '1', name: "Jaime", email: "Gabo es tontisimo"),
+        tags: [])
+  ]);
   @override
   Widget build(BuildContext context) {
     // final questionsProvider = Provider.of<QuestionsProvider>(context);
