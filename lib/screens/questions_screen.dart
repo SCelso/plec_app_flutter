@@ -4,6 +4,7 @@ import 'package:plec_app_flutter/models/questions.dart';
 import 'package:plec_app_flutter/providers/questions_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../global/enviroment.dart';
 import '../models/question.dart';
 import '../widgets/widgets.dart'
     show MultipleSelectionWidget, ReusableCard, SimpleSelectionWidget;
@@ -20,33 +21,64 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
   QuestionsList quesAnsList = QuestionsList(questions: [
     Question(
         id: '1',
-        description: "Gabo es tontisimo??",
-        type: "true-false",
+        description:
+            "Asumiendo que se tiene una lista de empleados, en el que los empleados tienen las propiedades sueldo, nif, nombre y cargo. ¿Que método debería utilizar para obtener una lista con los empleados que tengan el cargo 'gerente'?",
+        type: "simple-selection",
         image:
-            "http://10.141.4.126:3000/api/questions/files/64047f0537807640ed96c60a.png",
-        difficulty: 1,
+            "${Enviroment.apiUrl}/questions/files/6405ab134dbad86d13b9bf4c.png",
+        difficulty: 3,
         answers: [
-          Answer(text: "True", val: 1),
-          Answer(text: "True", val: 0),
+          Answer(text: "map", val: 0),
+          Answer(text: "filter", val: 1),
+          Answer(text: "forEach", val: 0),
+          Answer(text: "find", val: 0),
         ],
-        professor: Professor(id: '1', name: "Gabo", email: "Gabo es tontisimo"),
-        tags: []),
+        professor:
+            Professor(id: '1', name: "Gabo", email: "costanzag1999@gmail.com"),
+        tags: [
+          Tag(
+              id: "6405a95f4dbad86d13b9bf45",
+              name: "javascript",
+              color: "0xFFead41c")
+        ]),
     Question(
-        id: '2',
-        description: "Elige la orientación sexual de Gabo",
+        id: '1',
+        description: "¿Cúal de las siguientes afirmaciones son verdaderas?",
         type: "multiple-selection",
-        difficulty: 1,
+        difficulty: 3,
         answers: [
-          Answer(text: "Gay", val: 1),
-          Answer(text: "Homosexual", val: 0),
-          Answer(text: "Estonio", val: 1),
+          Answer(text: "Javascript es un lenguaje de programación", val: 1),
+          Answer(text: "1 == '1' retorna true", val: 1),
           Answer(
-              text: "Militante del gobierno bolivariano social-comunista ",
+              text:
+                  "Las clases pueden tener múltiples constructores utilizando la sobrecarga",
               val: 0),
         ],
         professor:
-            Professor(id: '1', name: "Jaime", email: "Gabo es tontisimo"),
-        tags: [])
+            Professor(id: '1', name: "Gabo", email: "costanzag1999@gmail.com"),
+        tags: [
+          Tag(
+              id: "6405a95f4dbad86d13b9bf45",
+              name: "javascript",
+              color: "0xFFead41c")
+        ]),
+    Question(
+        id: '1',
+        description: "¿Es javascript un lenguaje compilado?",
+        type: "true-false",
+        difficulty: 3,
+        answers: [
+          Answer(text: "Verdadero", val: 0),
+          Answer(text: "Falso", val: 1),
+        ],
+        professor:
+            Professor(id: '1', name: "Gabo", email: "costanzag1999@gmail.com"),
+        tags: [
+          Tag(
+              id: "6405a95f4dbad86d13b9bf45",
+              name: "javascript",
+              color: "0xFFead41c")
+        ]),
   ]);
   @override
   Widget build(BuildContext context) {
