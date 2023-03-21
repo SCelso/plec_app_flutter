@@ -17,30 +17,35 @@ class ReusableCard extends StatelessWidget {
         elevation: 7,
         shadowColor: Colors.grey,
         child: SizedBox(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              if (image != null)
-                Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(25),
-                    child: Image.network(
-                      image!,
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height / 3,
+          child: Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if (image != null)
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(25),
+                        child: Image.network(
+                          image!,
+                        ),
+                      ),
                     ),
                   ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: AutoSizeText(
+                    text,
+                    textAlign: TextAlign.center,
+                    maxFontSize: 40,
+                    minFontSize: 5,
+                  ),
                 ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: AutoSizeText(
-                  text,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 40),
-                  maxFontSize: 40,
-                  minFontSize: 10,
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
