@@ -1,4 +1,10 @@
+import 'dart:convert';
+
 import 'models.dart';
+
+Question questionFromJson(String str) => Question.fromJson(json.decode(str));
+
+String questionToJson(Question data) => json.encode(data.toJson());
 
 class Question {
   final String id;
