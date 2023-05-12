@@ -5,7 +5,6 @@ import 'package:plec_app_flutter/providers/nickname_provider.dart';
 import 'package:plec_app_flutter/theme/app_theme.dart';
 import 'package:provider/provider.dart';
 
-import '../models/user_response.dart';
 import '../providers/user_provider.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -51,7 +50,7 @@ class _Profile extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: TextFormField(
             autocorrect: false,
-            // initialValue: nickname,
+            initialValue: nickname,
             inputFormatters: <TextInputFormatter>[
               FilteringTextInputFormatter.allow(RegExp("[a-zA-Z0-9]")),
             ],
