@@ -25,6 +25,8 @@ class AppRoutes {
         {'join_game': (BuildContext context) => const JoinGameScreen()});
     appRoutes.addAll(
         {'questions': (BuildContext context) => const QuestionsScreen()});
+    appRoutes.addAll(
+        {'waiting_room': (BuildContext context) => const WaitingRoomScreen()});
     appRoutes.addAll({
       'card': (BuildContext context) => MultipleSelectionWidget(
             answers: [
