@@ -7,8 +7,26 @@ import 'package:provider/provider.dart';
 
 import '../providers/user_provider.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  final userFromDB = FirebaseAuth.instance.currentUser!;
+  dynamic nicknameText;
+
+  @override
+  void initState() {
+    super.initState();
+    nickname();
+  }
+
+  Future nickname() async {
+    nicknameText = NicknameProvider().getnickname();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,21 +40,15 @@ class ProfileScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           ChangeNotifierProvider(
-              create: (_) => NicknameProvider(), child: _Profile()),
+              create: (_) => NicknameProvider(), child: buildChild(context)),
         ],
       )),
     );
   }
-}
 
-class _Profile extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final userFromDB = FirebaseAuth.instance.currentUser!;
-    final nicknameTextField = Provider.of<NicknameProvider>(context);
-    final nickname = nicknameTextField.getnickname().toString();
+  Widget buildChild(BuildContext context) {
     return Form(
-      key: nicknameTextField.key,
+      key: NicknameProvider().key,
       child: Column(children: [
         Padding(
           padding: const EdgeInsets.all(8.0),
@@ -50,7 +62,7 @@ class _Profile extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: TextFormField(
             autocorrect: false,
-            initialValue: nickname,
+            initialValue: nicknameText,
             inputFormatters: <TextInputFormatter>[
               FilteringTextInputFormatter.allow(RegExp("[a-zA-Z0-9]")),
             ],
@@ -62,14 +74,14 @@ class _Profile extends StatelessWidget {
                 hintText: 'Cargar Nickname',
                 labelText: 'Nickname',
                 labelStyle: TextStyle(color: Colors.grey)),
-            onChanged: (value) => nicknameTextField.nickname = value,
+            onChanged: (value) => NicknameProvider().nickname = value,
           ),
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: ElevatedButton(
             onPressed: () {
-              final nickname = nicknameTextField.nickname;
+              final nickname = NicknameProvider().nickname;
               final userProvider =
                   Provider.of<UserProvider>(context, listen: false);
               userProvider.changeNickname(nickname);

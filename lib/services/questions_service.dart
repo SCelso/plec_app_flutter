@@ -1,17 +1,13 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:plec_app_flutter/models/models.dart' show Answer, Question;
 import 'package:plec_app_flutter/models/questions.dart';
-import 'package:provider/provider.dart';
-
-import '../providers/questions_provider.dart';
 
 class _QuestionsService {
   QuestionsList? _questions;
   int puntos = 0;
 
-  StreamController<QuestionsList> _questionsStreamController =
+  final StreamController<QuestionsList> _questionsStreamController =
       StreamController<QuestionsList>.broadcast();
 
   QuestionsList? get questions => _questions;
@@ -34,7 +30,7 @@ class _QuestionsService {
   // }
 
   dispose() {
-    _questionsStreamController?.close();
+    _questionsStreamController.close();
   }
 }
 
