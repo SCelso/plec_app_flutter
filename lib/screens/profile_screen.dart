@@ -5,6 +5,7 @@ import 'package:plec_app_flutter/providers/nickname_provider.dart';
 import 'package:plec_app_flutter/theme/app_theme.dart';
 import 'package:provider/provider.dart';
 
+import '../models/user_response.dart';
 import '../providers/user_provider.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -16,20 +17,21 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   final userFromDB = FirebaseAuth.instance.currentUser!;
-  dynamic nicknameText;
+  dynamic user;
 
   @override
   void initState() {
+    user = getUser();
     super.initState();
-    nickname();
   }
 
-  Future nickname() async {
-    nicknameText = NicknameProvider().getnickname();
+  Future getUser() async {
+    return userResponseFromJson(await UserProvider.getUserData());
   }
 
   @override
   Widget build(BuildContext context) {
+    final nicknameTextField = Provider.of<NicknameProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Profile'),
@@ -40,56 +42,55 @@ class _ProfileScreenState extends State<ProfileScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           ChangeNotifierProvider(
-              create: (_) => NicknameProvider(), child: buildChild(context)),
+              create: (_) => NicknameProvider(),
+              child: Form(
+                key: nicknameTextField.key,
+                child: Column(children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: CircleAvatar(
+                      backgroundColor: Colors.indigo,
+                      backgroundImage: NetworkImage(userFromDB.photoURL!),
+                      radius: 80,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextFormField(
+                      autocorrect: false,
+                      initialValue: user.nickname,
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.allow(
+                            RegExp("[a-zA-Z0-9]")),
+                      ],
+                      decoration: const InputDecoration(
+                          enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: AppTheme.primary)),
+                          focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: AppTheme.primary, width: 3)),
+                          hintText: 'Cargar Nickname',
+                          labelText: 'Nickname',
+                          labelStyle: TextStyle(color: Colors.grey)),
+                      onChanged: (value) => nicknameTextField.nickname = value,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        final nickname = nicknameTextField.nickname;
+                        final userProvider =
+                            Provider.of<UserProvider>(context, listen: false);
+                        userProvider.changeNickname(nickname);
+                      },
+                      child: const Text('Cambiar Nickname'),
+                    ),
+                  )
+                ]),
+              )),
         ],
       )),
-    );
-  }
-
-  Widget buildChild(BuildContext context) {
-    return Form(
-      key: NicknameProvider().key,
-      child: Column(children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: CircleAvatar(
-            backgroundColor: Colors.indigo,
-            backgroundImage: NetworkImage(userFromDB.photoURL!),
-            radius: 80,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: TextFormField(
-            autocorrect: false,
-            initialValue: nicknameText,
-            inputFormatters: <TextInputFormatter>[
-              FilteringTextInputFormatter.allow(RegExp("[a-zA-Z0-9]")),
-            ],
-            decoration: const InputDecoration(
-                enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: AppTheme.primary)),
-                focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: AppTheme.primary, width: 3)),
-                hintText: 'Cargar Nickname',
-                labelText: 'Nickname',
-                labelStyle: TextStyle(color: Colors.grey)),
-            onChanged: (value) => NicknameProvider().nickname = value,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: ElevatedButton(
-            onPressed: () {
-              final nickname = NicknameProvider().nickname;
-              final userProvider =
-                  Provider.of<UserProvider>(context, listen: false);
-              userProvider.changeNickname(nickname);
-            },
-            child: const Text('Cambiar Nickname'),
-          ),
-        )
-      ]),
     );
   }
 }
