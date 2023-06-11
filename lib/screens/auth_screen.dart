@@ -3,10 +3,12 @@ import 'dart:math';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:plec_app_flutter/services/socket_service.dart';
 import 'package:provider/provider.dart';
 import 'package:roulette/roulette.dart';
 
-import '../providers/user_provider.dart';
+import '../models/user_response.dart';
+import '../services/user_provider.dart';
 import '../widgets/widgets.dart' show MyRoulette;
 
 class AuthScreen extends StatefulWidget {
@@ -73,6 +75,13 @@ class _AuthScreenState extends State<AuthScreen>
                 final userProvider =
                     Provider.of<UserProvider>(context, listen: false);
                 userProvider.addUser(userEmail);
+
+                final userId =
+                    userResponseFromJson(await UserProvider.getUserData()).id;
+
+                final socketConnection =
+                    Provider.of<SocketService>(context, listen: false)
+                        .connectToServer(userId);
 
                 Navigator.popAndPushNamed(context, 'home');
               }).catchError((error) => print(error));

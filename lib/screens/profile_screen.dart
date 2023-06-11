@@ -1,12 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:plec_app_flutter/providers/nickname_provider.dart';
+import 'package:plec_app_flutter/services/nickname_provider.dart';
 import 'package:plec_app_flutter/theme/app_theme.dart';
 import 'package:provider/provider.dart';
 
 import '../models/user_response.dart';
-import '../providers/user_provider.dart';
+import '../services/user_provider.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);

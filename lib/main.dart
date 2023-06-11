@@ -1,14 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:plec_app_flutter/global/enviroment.dart';
-import 'package:plec_app_flutter/providers/questions_provider.dart';
+import 'package:plec_app_flutter/services/questions_provider.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 
 import 'package:plec_app_flutter/router/app_routes.dart';
 import 'package:plec_app_flutter/theme/app_theme.dart';
 
-import 'providers/user_provider.dart';
+import 'services/user_provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

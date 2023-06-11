@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:plec_app_flutter/models/models.dart';
 import 'package:plec_app_flutter/models/questions.dart';
-import 'package:plec_app_flutter/providers/questions_provider.dart';
+import 'package:plec_app_flutter/services/questions_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../global/enviroment.dart';

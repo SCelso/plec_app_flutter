@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:plec_app_flutter/providers/user_provider.dart';
+import 'package:plec_app_flutter/services/user_provider.dart';
 
 import '../models/user_response.dart';
 
