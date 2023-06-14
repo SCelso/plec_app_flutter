@@ -34,7 +34,7 @@ class JoinGameScreen extends StatelessWidget {
                   final socketConnection =
                       Provider.of<SocketService>(context, listen: false)
                           .connectToSocket(TextEditingController().text);
-                  Navigator.pushNamed(context, 'questions');
+                  Navigator.pushNamed(context, 'waiting_room');
                 },
                 child: const Text('Send')),
           ],

@@ -1,62 +1,41 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/roulette.dart';
+
 class WaitingRoomScreen extends StatelessWidget {
   const WaitingRoomScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25)),
-              elevation: 7,
-              shadowColor: Colors.grey,
-              child: SizedBox(
-                height: 500,
-                width: 300,
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: const [
-                          AutoSizeText(
-                            'text',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 30),
-                            maxFontSize: 40,
-                            minFontSize: 10,
-                          ),
-                          AutoSizeText(
-                            'text',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 40),
-                            maxFontSize: 40,
-                            minFontSize: 10,
-                          ),
-                          AutoSizeText(
-                            'text',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 40),
-                            maxFontSize: 40,
-                            minFontSize: 10,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+        body: Container(
+      width: double.infinity,
+      margin: const EdgeInsets.only(bottom: 40),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: const [
+          Padding(
+            padding: EdgeInsets.only(bottom: 100, left: 10, right: 10),
+            child: AutoSizeText(
+              'Waiting for host to start the game...',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 40,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF8B5CF6)),
+              maxFontSize: 40,
+              minFontSize: 10,
             ),
-            const Text('WaitingRoomScreen'),
-          ],
-        ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(bottom: 120),
+            child:
+                Image(image: AssetImage('assets/ruleta_flutter_sin_fondo.png')),
+          ),
+        ],
       ),
-    );
+    ));
   }
 }
